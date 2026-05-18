@@ -6,14 +6,18 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import io.c0ded.boatEvaporator.event.VehicleMove;
+import org.bukkit.Server;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class BoatEvaporator extends JavaPlugin {
-
+    public static BoatEvaporator PLUGIN;
+    public static Server SERVER;
     public static StateFlag VEHICLE_FLAG;
     @Override
     public void onEnable() {
         this.getServer().getPluginManager().registerEvents(new VehicleMove(), this);
+        PLUGIN = this;
+        SERVER = this.getServer();
     }
     public void onLoad() {
         FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();

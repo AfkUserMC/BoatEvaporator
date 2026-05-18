@@ -73,12 +73,13 @@ public class VehicleMove implements Listener {
                 case TNT_MINECART -> Material.TNT_MINECART;
                 default -> Material.AIR;
             };
-            vehicle.eject();
-            vehicle.remove();
-            to.getWorld().dropItem(to, ItemStack.of(vehicleItem));
-            // fun
-            to.getWorld().playSound(to, Sound.ENTITY_ZOMBIE_INFECT, 0.25f, 1f);
-            to.getWorld().spawnParticle(Particle.SMOKE, to, 25);
+            BoatEvaporator.SERVER.getRegionScheduler().execute(BoatEvaporator.PLUGIN, to, () -> {
+                vehicle.eject();
+                vehicle.getScheduler().execute(BoatEvaporator.PLUGIN, vehicle::remove, null, 0);
+                to.getWorld().dropItem(to, ItemStack.of(vehicleItem));
+                to.getWorld().playSound(to, Sound.ENTITY_ZOMBIE_INFECT, 0.25f, 1f);
+                to.getWorld().spawnParticle(Particle.SMOKE, to, 25);
+            });
         }
     }
 }
