@@ -5,7 +5,6 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.domains.Association;
 import com.sk89q.worldguard.protection.association.Associables;
 import com.sk89q.worldguard.protection.association.RegionAssociable;
-import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import org.bukkit.Location;
@@ -33,15 +32,10 @@ public class VehicleMove implements Listener {
         } // only check every block move to reduce checks
         Vehicle vehicle = event.getVehicle();
         RegionAssociable associable = Associables.constant(Association.NON_MEMBER); // boats are usually never members
-        RegionManager regionManager = WorldGuard.getInstance()
-                .getPlatform()
-                .getRegionContainer()
-                .get(BukkitAdapter.adapt(to.getWorld()));
         RegionContainer container = WorldGuard.getInstance()
                 .getPlatform()
                 .getRegionContainer();
         RegionQuery query = container.createQuery();
-        if (regionManager == null) return;
         if (!query.testState(BukkitAdapter.adapt(to),
                 associable,
                 BoatEvaporator.VEHICLE_FLAG))
