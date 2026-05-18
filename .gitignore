@@ -1,0 +1,18 @@
+# Better gitignore later. stole some rules from an old gitignore zzz
+build/
+**/build/
+.gradle
+run/
+.idea
+.idea/
+out/
+*.jar
+*.zip
+*.tar.gz
+hs_err_pid*
+Thumbs.db
+*.lnk
+[Dd]esktop.ini
+*.log
+*.class
+!gradle-wrapper.jar

@@ -1,0 +1,15 @@
+name: BoatEvaporator
+description: $description
+prefix: BoatEvaporator
+version: '${version}'
+
+main: io.c0ded.boatEvaporator.BoatEvaporator
+api-version: '26.1.2'
+load: POSTWORLD
+
+authors: [ AfkUser ]
+dependencies:
+  server:
+    WorldGuard:
+      load: BEFORE
+      required: true
